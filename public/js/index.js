@@ -1,0 +1,1 @@
+console.log("FUNCIONA EL SCRIPT GENERAL");

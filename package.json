@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "scripts": {
+    "build:css": "tailwindcss build public/css/input.css -o public/css/output.css",
+    "watch:css": "tailwindcss build public/css/input.css -o public/css/output.css --watch"
+  }
+  
+}

@@ -1,0 +1,38 @@
+# Activar mod_rewrite
+RewriteEngine On
+
+# Redirigir a index.php para todas las URL que no sean archivos o directorios
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^ index.php [L]
+
+# Omitir archivos específicos de la reescritura
+# RewriteRule ^(.+)\.php$ - [L]
+
+RewriteRule ^Home$                              index.php?identificador=1&pagina=home
+RewriteRule ^Nosotros$                          index.php?identificador=2&pagina=nosotros
+RewriteRule ^Contacto$                          index.php?identificador=3&pagina=contacto
+RewriteRule ^Tienda$                            index.php?identificador=4&pagina=tienda
+RewriteRule ^Producto_([a-zA-Z0-9]+)$           index.php?identificador=5&pagina=detalle
+
+# Permitir archivos .htaccess en subdirectorios
+Options +FollowSymLinks
+
+# Establecer el tipo de archivo MIME para archivos PHP
+AddType application/x-httpd-php .php
+
+# Protección contra ataques de fuerza bruta
+<IfModule mod_php>
+  php_flag register_globals off
+  php_flag magic_quotes_gpc off
+  php_flag session.use_cookies on
+  php_flag session.use_only_cookies on
+  php_flag session.cookie_httponly on
+  php_value session.gc_maxlifetime 1440
+</IfModule>
+
+# Denegar el acceso a archivos sensibles
+<FilesMatch "(\.bak|\.config|\.git|\.svn|\.DS_Store)$">
+  Order deny,allow
+  Deny from all
+</FilesMatch>
